@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign up Box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="index.css" rel="stylesheet">
+
+<style type="text/css">
+
+
+body {
+font-family:Arial,sans-serif;
+background:#e6e6ff;
+}
+*{box-sizing:border-box;margin:0px;padding:0px;}
+
+
+#main {
+width:450px;
+overflow:hidden;
+background: #001a33;
+margin:auto;
+margin-top:10%;
+box-shadow:5px 15px 7px -8px black;
+}
+
+#main h2{
+padding:10px 0px;
+text-align:center;
+margin:5px 0px;
+color:#ffbb33;
+font-size:28px;
+}
+
+.cheak label{
+padding:5px 0px;
+margin-left:24px;
+font-size:17px;
+color:#ffbb33;
+font-weight:bold;
+}
+
+.cheak  input {
+display:block;
+width:90%;
+padding:8px;
+margin-left:24px;
+margin-bottom:4px;
+font-size:16px;
+border:2px solid #ffbb33;
+border-radius:3px;
+outline:none;
+background: #ffffe6;
+color:#000033;
+text-decoration:none;
+}
+.cheak.error input{
+border-color:#ff1a1a;
+border-width:1px;
+background:#ffe6e6;
+}
+.cheak.success input{
+border-width:1px;
+border-color:#47d147;
+background:#ebfaeb;
+}
+
+
+#button{
+width:100px !important;
+margin:20px auto !important;
+background:#cca300 !important;
+display:block;
+color:#fff !important;
+font-weight:bold;
+border:none !important;
+padding:6px;
+}
+#button:hover{
+background:#fff5e6 !important;
+color:#333 !important;
+cursor:pointer !important;
+transition: .4s;
+}
+
+.haveAc {
+width:100%;
+padding:10px 0px;
+text-align:center;
+padding-bottom:20px;
+}
+.haveAc p{
+color:#f2f2f2 !important;
+font-weight:normal !important;
+display:inline;
+}
+.haveAc a{
+text-decoration:none;
+color:#ffbb33;
+font-weight:bold;
+}
+.haveAc a:hover{
+color:#fff;
+transition:.3s;
+}
+
+.cheak span{
+display:block;
+margin-bottom:20px;
+color:#ff1a1a;
+margin-left:25px;
+font-size:12px;
+font-weight:bold;
+visibility:hidden;
+}
+.cheak.error span{
+visibility:visible;
+}
+
+
+@media only screen and (max-width: 500px) {
+  #main {
+  width:100%;
+  margin-top:0px;
+  }
+  #main h2{
+  font-size:18px;
+  }
+  .cheak  label{
+  font-size:14px;
+  margin-left:14px;
+  }
+  
+  .cheak  input {
+  margin-left:14px;
+  padding:5px;
+  font-size:13px;
+  border-width:1px;
+  border-radius:2px;
+  }
+ .cheak span{
+  margin-left:13px;
+  font-size:10px;
+  }
+}
+
+
+
+
+</style>
+
+
+</head>
+<body>
+
+<form action=""  id="main">
+
+<h2>Member Sign Up</h2>
+
+<div class="cheak">
+<label>First Name :</label>
+<input id="fName" type="text" placeholder="Biplob" autocomplete="off" >
+<span id="fMgs">Error</span>
+</div>
+
+<div class="cheak">
+<label>Last Name : </label>
+<input id="lName" type="text" placeholder="Kumar" autocomplete="off">
+<span id="lMgs">Error</span>
+</div>
+
+<div class="cheak">
+<label>Email : </label>
+<input id="email" type="email" placeholder="biplobkumar4040@gmail.com" autocomplete="off">
+<span id="emails">Error</span>
+</div>
+
+<div class="cheak">
+<label>Phone Number : </label>
+<input id="phone" type="number" placeholder="+(880)-15678-88999" autocomplete="off">
+<span id="phone">Error</span>
+</div>
+
+<div class="cheak">
+<label>Create a password</label>
+<input id="password" type="password" placeholder="Make a password" autocomplete="off">
+<span id="pass">Error</span>
+</div>
+
+<div class="cheak">
+<label>Re-enter password</label>
+<input id="password2" type="password" placeholder="Re-enter password " autocomplete="off">
+<span id="conPass">Error</span>
+</div>
+
+<input id="button"  type="submit" value="Sign up" >
+
+
+<div class="haveAc" >
+
+<p>Already have an account ? </p>
+<a href="#">Login</a>
+
+</div>
+
+
+</form>
+
+<script type="text/javascript">
+
+
+var form = document.getElementById("main");
+
+var fName = document.getElementById("fName");
+
+var lName = document.getElementById("lName");
+
+var email = document.getElementById("email");
+
+
+var number = document.getElementById("phone");
+
+var password = document.getElementById("password");
+
+var password2 = document.getElementById("password2");
+
+//massage
+
+function showErr(input,mgs){
+var cheak = input.parentElement;
+cheak.className= 'cheak error';
+span = cheak.querySelector("span");
+span.innerText = mgs;
+};
+
+function showSuccess(input){
+var cheak = input.parentElement;
+cheak.className= 'cheak success';
+};
+
+function isValidEmail (email){
+
+   return String(email)
+   .toLowerCase()
+   .match(
+   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+   );
+   
+
+}
+
+
+form.addEventListener("submit",function (a){
+a.preventDefault();
+
+
+
+if(fName.value === ""){
+showErr(fName,"First name is required")
+}
+else if(!isNaN(fName.value)){
+showErr(fName,"Numbers are not allowed")
+}
+else if(fName.value.length>15 || fName.value.length<3){
+showErr(fName,"Your name character length must be 3 and 14")
+}
+else{
+showSuccess(fName);
+}
+
+
+
+if(lName.value === ""){
+showErr(lName,"Last name is required")
+}
+else if(!isNaN(lName.value)){
+showErr(lName,"Numbers are not allowed")
+}
+else if(lName.value.length>15 || lName.value.length<3){
+showErr(lName,"Your name character length must be 3 and 14")
+}
+else{
+showSuccess(lName);
+}
+
+
+if(number.value === ""){
+showErr(number,"First name is required")
+}
+else if(isNaN(number.value)){
+showErr(number,"Letter are not allowed")
+}
+else if( number.value.length<9 || number.value.length>15){
+showErr(number,"Your phone number digits must be 9 and 15");
+}
+else{
+showSuccess(number);
+}
+
+if(password.value === ""){
+showErr(password,"Password is required")
+}
+
+else if(password.value.length>150 || password.value.length<6){
+showErr(password,"Password must be allow 6 to 150")
+}
+else{
+showSuccess(password);
+}
+
+
+if(password2.value==""){
+showErr(password2,"Conform password is required")
+}
+else if(password.value !== password2.value){
+showErr(password2,"Password did not matched");
+}
+else if(password.value === password2.value){
+showSuccess(password2);
+}
+
+if(email.value==""){
+showErr(email,"Email is required")
+}else if(!isValidEmail(email.value)){
+showErr(email,"Invalid Email")
+}
+else{
+showSuccess(email);
+}
+
+});
+</script>
+</body>
+</html>
